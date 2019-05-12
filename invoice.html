@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="invoice.css">
+
+    <title>Invoice page</title>
+  </head>
+  <body>
+      <div class="main">
+          <header>
+              <!--<nav class="navbar navbar-light bg-light">
+                <a class="navbar-brand" href="http://www.nordicbackoffice.lv/en">
+                  <img src="logo-nordic-backoffice.png" width="200" height="45" alt="">
+                </a>
+              </nav>-->
+              <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <a class="navbar-brand" href="http://www.nordicbackoffice.lv/en"><img src="logo-nordic-backoffice.png" width="200" height="43" alt=""></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+                  <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                      <a class="nav-link active" href="#">Verifying</a>
+                    </li>
+                  </ul>
+
+                <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                  <ul class="navbar-nav mr-auto mt-2 mt-lg-0"> 
+                  </ul>
+                  <form class="form-inline" action="index.html">
+                    <div class="form-group mb-2">
+                      <label for="staticEmail2" class="sr-only">Email</label>
+                      <input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="username@com">
+                    </div>
+                    <button type="submit" class="btn btn-primary mb-2">Log out</button>
+                  </form>
+                </div>
+              </nav>
+          </header>
+          <div class="content">
+              <div class="container">
+                  <div class="row">
+                      <div class="col-lg-9">
+                          <div class="invoice-view">
+                              <div class="invoice"></div>
+                          </div>
+                      </div>
+                      <div class="col-lg-3">
+                          <div class="info">
+                              <div class="container">
+                                  <div class="row">
+                                      <div class="col-12">
+                                          <form>
+                                            <div class="form-group first">
+                                              <!--<label for="formGroupExampleInput">Example label</label>-->
+                                              <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Supplier company name">
+                                            </div>
+                                          </form>
+                                      </div>
+                                  </div>
+                                  <div class="row">
+                                      <div class="col-6">
+                                          <form>
+                                            <div class="form-group">
+                                              <!--<label for="formGroupExampleInput">Example label</label>-->
+                                              <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Bankgiro">
+                                            </div>
+                                          </form>
+                                      </div>
+                                      <div class="col-6">
+                                          <form>
+                                            <div class="form-group">
+                                              <!--<label for="formGroupExampleInput">Example label</label>-->
+                                              <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Plusgiro">
+                                            </div>
+                                          </form>
+                                      </div>
+                                  </div>
+                                  <div class="row">
+                                      <div class="col-6">
+                                          <button type="button" class="btn btn-danger">Not verifiable</button>
+                                      </div>
+                                      <div class="col-6">
+                                          <button type="button" class="btn btn-warning">wrong supplier</button>
+                                      </div>
+                                  </div>
+                                  <div class="row">
+                                      <div class="col-12">
+                                          <form>
+                                            <div class="form-group first">
+                                              <!--<label for="formGroupExampleInput">Example label</label>-->
+                                              <input type="text" class="form-control" id="formGroupExampleInput" placeholder="OCR/Referensnr">
+                                            </div>
+                                          </form>
+                                      </div>
+                                  </div>
+                                  <div class="row">
+                                      <div class="col-12">
+                                          <form>
+                                            <div class="form-group">
+                                              <!--<label for="formGroupExampleInput">Example label</label>-->
+                                              <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Fakturanr">
+                                            </div>
+                                          </form>
+                                      </div>
+                                  </div>
+                                  <div class="row">
+                                      <div class="col-12">
+                                          <form>
+                                            <div class="form-group">
+                                              <!--<label for="formGroupExampleInput">Example label</label>-->
+                                              <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Fakturadatum">
+                                            </div>
+                                          </form>
+                                      </div>
+                                  </div>
+                                  <div class="row">
+                                      <div class="col-12">
+                                          <form>
+                                            <div class="form-group">
+                                              <!--<label for="formGroupExampleInput">Example label</label>-->
+                                              <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Förfallodatum">
+                                            </div>
+                                          </form>
+                                      </div>
+                                  </div>
+                                  <div class="row">
+                                      <div class="col-12">
+                                          <form>
+                                            <div class="form-group">
+                                              <!--<label for="formGroupExampleInput">Example label</label>-->
+                                              <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Moms">
+                                            </div>
+                                          </form>
+                                      </div>
+                                  </div>
+                                  <div class="row">
+                                      <div class="col-12">
+                                          <form>
+                                            <div class="form-group">
+                                              <!--<label for="formGroupExampleInput">Example label</label>-->
+                                              <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Total">
+                                            </div>
+                                          </form>
+                                      </div>
+                                  </div>
+                                  <div class="row">
+                                      <div class="col-12">
+                                          <div class="form-group">
+                                            <label for="exampleFormControlSelect1">Fakturatyp</label>
+                                            <select class="form-control" id="exampleFormControlSelect1">
+                                              <option>Invoice</option>
+                                              <option>Credit</option>
+                                              <option>Reminder</option>
+                                              <option>Noninvoice</option>
+                                            </select>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="row">
+                                      <div class="col-4"></div>
+                                      <div class="col-4"></div>
+                                      <div class="col-4">
+                                          <button type="button" class="btn btn-secondary">Next</button>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+    
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/popper.js/dist/popper.min.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  </body>
+</html>

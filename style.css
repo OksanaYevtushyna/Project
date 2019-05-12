@@ -1,0 +1,61 @@
+.main {
+    display: grid;
+    grid-template-columns: repeat (6, 1fr);
+    grid-template-rows: [header] 64px [content] 4fr [footer] 80px;
+    width: 100vw;
+    height: 100vh;
+}
+
+header {
+    grid-column: span 6;
+    grid-row: header;
+    background-color: azure;
+}
+
+nav {
+    background-color: floralwhite;
+    opacity: 0.8;
+}
+
+nav ul a {
+    color: black;
+}
+
+img {
+    margin: 3px;
+    margin-left: 13px;
+}
+
+.content {
+    grid-column: span 6;
+    grid-row: content;
+    background-color: #C4C4C4;
+    border-top: 2px solid rgba(228,78,3, 0.7);
+}
+
+.programName {
+    margin-top: 8%;
+    font-family: fantasy;
+    font-size: 20px;
+    text-align: center;
+}
+
+form {
+    margin-top: 13%;
+}
+
+.row .col.s6 {
+    width: 100%;
+}
+
+.btn, .btn-large, .btn-small {
+    background-color: #FF5800;
+    margin-top: 5px;
+}
+
+footer {
+    grid-column: span 6;
+    grid-row: footer;
+    background-color: rgba(39,58,64, 0.8);
+    text-align: center;
+}
