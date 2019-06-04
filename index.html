@@ -17,9 +17,9 @@
                   <div class="nav-wrapper">
                     <a href="http://www.nordicbackoffice.lv/en" class="brand-logo"><img src="logo-nordic-backoffice.png" height="55px"></a>
                     <ul id="nav-mobile" class="right hide-on-med-and-down">
-                      <li><a href="sass.html">Services</a></li>
-                      <li><a href="badges.html">About us</a></li>
-                      <li><a href="collapsible.html">Contacts</a></li>
+                      <li><a href="#">Services</a></li>
+                      <li><a href="#">About us</a></li>
+                      <li><a href="#">Contacts</a></li>
                     </ul>
                   </div>
                 </nav>
@@ -49,9 +49,11 @@
                               <label>
                                 <input id="indeterminate-checkbox" type="checkbox" />
                                 <span>Check me out</span>
+                                  <span id="reset"><a href="pass.html" style="color: #26a69a; margin-left: 25px;">Reset password</a></span>
                               </label>
                             </p>
-                            <button class="btn waves-effect waves-light" type="submit" name="action">Submit</button>
+                                
+                            <button class="btn waves-effect waves-light" type="submit" name="action">Log in</button>
                             </form>
                         </div>
                         <div class="col s4"> 
@@ -65,5 +67,14 @@
         </div>
 
       <script type="text/javascript" src="bower_components/materialize/dist/js/materialize.min.js"></script>
+        <script>
+            function check(form) {
+                if (form.user_name2.value == "Oksana" && form.password.value == "needforspeed") {
+                    window.opener('invoice.html')
+                } else {
+                    alert('Wrong password. Accsess denied!')
+                }
+            }
+        </script>
     </body>
   </html>

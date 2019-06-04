@@ -53,6 +53,12 @@ form {
     margin-top: 5px;
 }
 
+#reset {
+    color: #FF5901;
+    font-size: 16px;
+    margin-top: 5px;
+}
+
 footer {
     grid-column: span 6;
     grid-row: footer;

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="invoice.css">
 
     <title>Invoice page</title>
@@ -63,19 +64,11 @@
                                       </div>
                                   </div>
                                   <div class="row">
-                                      <div class="col-6">
+                                      <div class="col-12">
                                           <form>
-                                            <div class="form-group">
+                                            <div class="form-group first">
                                               <!--<label for="formGroupExampleInput">Example label</label>-->
-                                              <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Bankgiro">
-                                            </div>
-                                          </form>
-                                      </div>
-                                      <div class="col-6">
-                                          <form>
-                                            <div class="form-group">
-                                              <!--<label for="formGroupExampleInput">Example label</label>-->
-                                              <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Plusgiro">
+                                              <input type="text" class="form-control" id="formGroupExampleInput" placeholder="IBAN">
                                             </div>
                                           </form>
                                       </div>
@@ -85,7 +78,7 @@
                                           <button type="button" class="btn btn-danger">Not verifiable</button>
                                       </div>
                                       <div class="col-6">
-                                          <button type="button" class="btn btn-warning">wrong supplier</button>
+                                          <button type="button" class="btn btn-warning">Wrong supplier</button>
                                       </div>
                                   </div>
                                   <div class="row">
@@ -93,7 +86,7 @@
                                           <form>
                                             <div class="form-group first">
                                               <!--<label for="formGroupExampleInput">Example label</label>-->
-                                              <input type="text" class="form-control" id="formGroupExampleInput" placeholder="OCR/Referensnr">
+                                              <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Invoice nr">
                                             </div>
                                           </form>
                                       </div>
@@ -103,7 +96,7 @@
                                           <form>
                                             <div class="form-group">
                                               <!--<label for="formGroupExampleInput">Example label</label>-->
-                                              <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Fakturanr">
+                                              <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Invoice date">
                                             </div>
                                           </form>
                                       </div>
@@ -113,7 +106,7 @@
                                           <form>
                                             <div class="form-group">
                                               <!--<label for="formGroupExampleInput">Example label</label>-->
-                                              <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Fakturadatum">
+                                              <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Due date">
                                             </div>
                                           </form>
                                       </div>
@@ -123,17 +116,7 @@
                                           <form>
                                             <div class="form-group">
                                               <!--<label for="formGroupExampleInput">Example label</label>-->
-                                              <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Förfallodatum">
-                                            </div>
-                                          </form>
-                                      </div>
-                                  </div>
-                                  <div class="row">
-                                      <div class="col-12">
-                                          <form>
-                                            <div class="form-group">
-                                              <!--<label for="formGroupExampleInput">Example label</label>-->
-                                              <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Moms">
+                                              <input type="text" class="form-control" id="formGroupExampleInput" placeholder="VAT">
                                             </div>
                                           </form>
                                       </div>
@@ -151,7 +134,7 @@
                                   <div class="row">
                                       <div class="col-12">
                                           <div class="form-group">
-                                            <label for="exampleFormControlSelect1">Fakturatyp</label>
+                                            <label for="exampleFormControlSelect1">Invoice type</label>
                                             <select class="form-control" id="exampleFormControlSelect1">
                                               <option>Invoice</option>
                                               <option>Credit</option>
@@ -162,10 +145,12 @@
                                       </div>
                                   </div>
                                   <div class="row">
-                                      <div class="col-4"></div>
+                                      <div class="col-4">
+                                          <button type="button" class="btn btn-secondary previous">Previous</button>
+                                      </div>
                                       <div class="col-4"></div>
                                       <div class="col-4">
-                                          <button type="button" class="btn btn-secondary">Next</button>
+                                          <button type="button" class="btn btn-secondary next">Next</button>
                                       </div>
                                   </div>
                               </div>

@@ -1,0 +1,70 @@
+.main {
+    display: grid;
+    grid-template-columns: repeat (6, 1fr);
+    grid-template-rows: [header] 62px [content] 4fr [footer] 80px;
+    width: 100vw;
+    height: 100vh;
+}
+
+header {
+    grid-column: span 6;
+    grid-row: header;
+    background-color: blanchedalmond; 
+}
+
+nav {
+    background-color: cornsilk;
+}
+
+nav ul a {
+    color: #44484B;
+}
+
+img {
+    margin: 3px;
+    margin-left: 10px;
+}
+
+.content {
+    grid-column: span 6;
+    grid-row: content;
+    background-color: azure;
+    border-top: 2px solid #D8474F;
+}
+
+.change {
+    margin-top: 10%;
+    font-family: Tahoma;
+    font-size: 20px;
+    text-align: center;
+    font-weight: 550;
+}
+
+input[type=button] {
+    border: none;
+    width: 190px;
+    background: #25CDB9;
+    color: white;
+    font-size: 16px;
+    line-height: 25px;
+    padding: 10px 0;
+    border-radius: 15px;
+    cursor: pointer;
+    margin-top: 5px;
+}
+
+input[type=button]:hover {
+    color: black;
+    background-color: #FF5901;
+}
+
+footer {
+    grid-column: span 6;
+    grid-row: footer;
+    background-color: #444850;
+}
+
+footer p {
+    text-align: center;
+    color: #FAFADE;
+}
