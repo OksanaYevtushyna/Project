@@ -1,24 +1,21 @@
 <!DOCTYPE html>
+
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="invoice.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.min.js"></script>
-
+    <script src="https://kit.fontawesome.com/5da50cccee.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@2.0.943/build/pdf.min.js"></script>
     <title>Invoice page</title>
   </head>
+
   <body>
       <div class="main">
           <header>
-              <!--<nav class="navbar navbar-light bg-light">
-                <a class="navbar-brand" href="http://www.nordicbackoffice.lv/en">
-                  <img src="logo-nordic-backoffice.png" width="200" height="45" alt="">
-                </a>
-              </nav>-->
+              
               <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <a class="navbar-brand" href="http://www.nordicbackoffice.lv/en"><img src="logo-nordic-backoffice.png" width="200" height="43" alt=""></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
@@ -29,6 +26,7 @@
                       <a class="nav-link active" href="#">Verifying</a>
                     </li>
                   </ul>
+
 
                 <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                   <ul class="navbar-nav mr-auto mt-2 mt-lg-0"> 
@@ -49,32 +47,38 @@
                       <div class="col-lg-9">
                           <div class="invoice-view">
                               <div class="invoice">
-                                  <div id="pdf_reader">
+                                  <div id="pdf_reader" style="overflow: scroll">
                                       <div id="canvas_container">
-                                          <canvas id="pdf_renderer"></canvas>
+                                          <canvas id="pdf-render" style="width: 598px"></canvas>
                                       </div>
                                   </div>
                               </div>
                           </div>
-                          <div class="row">
+                          <div class="row bottom-bar">
                               <div class="col-1"></div>
                               <div class="col-2">
-                                  <button type="button" class="btn btn-primary btn-sm" id="go_previous">Previous page</button>
-                              </div>
-                              <div class="col-3">
-                                  <div class="input-group input-group-sm mb-3">
-                                    <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" value="1" id="current_page">
-                                  </div>
-                              </div>
-                              <div class="col-3">
-                                  <button type="button" class="btn btn-secondary btn-sm" id="go_next">Next page</button>
-                              </div>
-                              <div class="col-3">
                                   <div id="zoom_controls">  
                                       <button id="zoom_in">+</button>
                                       <button id="zoom_out">-</button>
                                   </div>
                               </div>
+                              <div class="col-3">
+                                  <button type="button" class="btn btn-primary btn-sm" id="prev-page"><i class="fas fa-arrow-circle-left"></i> Previous page</button>
+                              </div>
+                              <!--<div class="col-3">
+                                  <div class="input-group input-group-sm mb-3">
+                                    <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" value="1" id="current_page">
+                                  </div>
+                              </div>-->
+                              <div class="col-2">
+                                  <button type="button" class="btn btn-secondary btn-sm" id="next-page">Next page <i class="fas fa-arrow-circle-right"></i></button>
+                              </div>
+                              <div class="col-3">
+                                  <span class="page-info">
+                                      Page <span id="page-num"></span> of <span id="page-count"></span>
+                                  </span>
+                              </div>
+                              <div class="col-1"></div>
                           </div>
                       </div>
                       <div class="col-lg-3">
@@ -84,7 +88,6 @@
                                       <div class="col-12">
                                           <form>
                                             <div class="form-group first">
-                                              <!--<label for="formGroupExampleInput">Example label</label>-->
                                               <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Supplier company name">
                                             </div>
                                           </form>
@@ -165,6 +168,7 @@
                                           </div>
                                       </div>
                                   </div>
+
                                   <div class="row">
                                       <div class="col-4">
                                           <button type="button" class="btn btn-secondary previous">Previous</button>
@@ -183,35 +187,113 @@
       </div>
 
     
+
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <script src="bower_components/popper.js/dist/popper.min.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.min.js"></script>
+    <script src="https://mozilla.github.io/pdf.js/build/pdf.js"></script>
       
     <script>
-        var myState = {
-            pdf: null,
-            currentPage: 1,
-            zoom: 1
-        };
         
-        pdfjsLib.getDocument('./p893_13092012_d2_new.pdf').then(doc => { //WRITE THE PATH TO THE LOCAL FOLDER
+        const url = 'Амазонки.pdf'; /*WRITE THE PATH TO THE LOCAL FOLDER*/
             
-            doc.getPage(myState.currentPage).then(page => {
-                var myCanvas = document.getElementById("pdf_renderer");
-                var context = myCanvas.getContext("2d");
+            let pdfDoc = null,
+                pageNum = 1,
+                pageIsRendering = false,
+                pageNumIsPending = null,
+                scale = 1.5;
+            
+            const canvas = document.querySelector('#pdf-render'),
+                  ctx = canvas.getContext('2d');
+            
+            //Render the page
+            const renderPage = num => {
+                pageIsRendering = true;
                 
-                var viewport = page.getViewport(myState.zoom);
-                myCanvas.width = viewport.width;
-                myCanvas.height = viewport.height;
-                
-                page.render({
-                    canvasContext: context,
-                    viewport: viewport
+                //Get the page
+                pdfDoc.getPage(num).then(page => {
+                    const viewport = page.getViewport({ scale });
+                    canvas.height = viewport.height;
+                    canvas.width = viewport.width;
+                    
+                    const renderCtx = {
+                        canvasContext: ctx,
+                        viewport
+                    }
+                    
+                    page.render(renderCtx).promise.then(() => {
+                        pageIsRendering = false;
+                        
+                        if(pageNumIsPending != null) {
+                            renderPage(pageNumIsPending);
+                            pageNumIsPending = null;
+                        }
+                    });
+                    
+                    //Output current page
+                    document.querySelector('#page-num').textContent = num;
                 });
-            });
-        });
+            };
+            
+            //Check for pages rendering
+            const checkRenderPage = num => {
+                if(pageIsRendering) {
+                    pageNumIsPending = num;
+                } else {
+                    renderPage(num);
+                }
+            }
+            
+            //Show Previous Page
+            const showPrevPage = () => {
+                if(pageNum <= 1) {
+                    return;
+                } 
+                pageNum--;
+                checkRenderPage(pageNum);
+            }
+            
+            //Show Next Page
+            const showNextPage = () => {
+                if(pageNum >= pdfDoc.numPages) {
+                    return;
+                } 
+                pageNum++;
+                checkRenderPage(pageNum);
+            }
+            
+            
+            const zoomIn = () => {
+                scale = scale + 0.15;
+                checkRenderPage(pageNum);
+            } 
+            
+            const zoomOut = () => {
+                if(scale <= 0.15) {
+                    return;
+                }
+                scale = scale - 0.15;
+                checkRenderPage(pageNum);
+            }
+                       
+            //Get Document
+            pdfjsLib.getDocument(url).promise.then(pdfDoc_ => {
+                pdfDoc = pdfDoc_;
+                
+                document.querySelector('#page-count').textContent = pdfDoc.numPages;
+                
+                renderPage(pageNum)
+            })
+             
+            
+            // Button Events
+            document.querySelector('#prev-page').addEventListener('click', showPrevPage);
+            document.querySelector('#next-page').addEventListener('click', showNextPage);
+            document.querySelector('#zoom_in').addEventListener('click', zoomIn);
+            document.querySelector('#zoom_out').addEventListener('click', zoomOut);
         
-        
+
     </script>
   </body>
 </html>
