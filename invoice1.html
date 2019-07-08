@@ -249,6 +249,26 @@
                 checkRenderPage(pageNum);
             }
             
+            document.onkeydown = function(e){
+                switch (e.key) {
+                    case 'ArrowLeft':
+                        debugger
+                        if(pageNum <= 1) {
+                        return;
+                      } 
+                      pageNum--;
+                      checkRenderPage(pageNum);
+                         break;
+                      case 'ArrowRight':
+                         if(pageNum >= pdfDoc.numPages) {
+                         return;
+                      } 
+                      pageNum++;
+                      checkRenderPage(pageNum);
+                        break;
+                      } 
+                  };
+            
             
             const zoomIn = () => {
                 scale = scale + 0.15;
@@ -271,12 +291,39 @@
                 
                 renderPage(pageNum)
             })
+        
+        
+            /*function showPrPage(e) {
+                var keyCode = e.keyCode;
+                if(keyCode == 37) {
+                    pageNum--;
+                    checkRenderPage(pageNum);
+                } else {
+                    if(pageNum >= 1){
+                        return;
+                    }
+                }
+            };
+        
+            function showNtPage(e){
+                var keyCode = e.keyCode;
+                if(keyCode == 39) {
+                    pageNum++;
+                    checkRenderPage(pageNum);
+                } else {
+                    if(pageNum >= pdfDoc.numPages) {
+                        return;
+                    }
+                }
+            }*/
             
             
             document.querySelector('#prev-page').addEventListener('click', showPrevPage);
             document.querySelector('#next-page').addEventListener('click', showNextPage);
             document.querySelector('#zoom_in').addEventListener('click', zoomIn);
             document.querySelector('#zoom_out').addEventListener('click', zoomOut);
+        
+            
         
 
     </script>
