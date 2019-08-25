@@ -1,4 +1,4 @@
- const url = 'Wiki.pdf'; /*WRITE THE PATH TO THE LOCAL FOLFER*/
+ const url = 'Wiki.pdf'; /*WRITE THE PATH TO THE LOCAL FOLDER*/
             
             let pdfDoc = null,
                 pageNum = 1,
@@ -131,13 +131,66 @@
                 document.querySelector('#page-count').textContent = pdfDoc.numPages;
                 
                 renderPage(pageNum)
-            })
+            });
+            
+           /* var Parse = require('parse');
+            let str = [];
+                pdfjsLib.getDocument(url).then(function(pdf) {
+                  for(let i = 1; i <= pdf.numPages; i++) {
+                    pdf.getPage(i).then(function(page) {
+                      page.getTextContent().then(function(textContent) {
+                        for(let j = 0; j < textContent.items.length; j++) {
+                          str.push(textContent.items[j].str);
+                        }
+                        parse(str);
+                      });
+                    });
+                  }
+                });*/
         
             
+            function countWords(pdfUrl){
+                var pdf = pdfjsLib.getDocument(url);
+                return pdf.then(function(pdf) { // calculate total count for document
+                     var maxPages = pdfDoc.numPages;
+                     var countPromises = []; // collecting all page promises
+                     for (var j = 1; j <= maxPages; j++) {
+                        var page = pdf.getPage(j);
+
+                        var txt = "";
+                        countPromises.push(page.then(function(page) { // add page promise
+                            var textContent = page.getTextContent();
+                            return textContent.then(function(page){ // return content promise
+
+                            for(var i=0;i<page.items.length;i++){
+                                txtadd = page.items[i].str
+                                txt += txtadd.replace(/[^a-zA-Z0-9:;,.?!-() ]/g,'');
+                            }
+                                console.log(txt);
+                                return txt.split(" ").length; // value for page words
+
+                            });
+                        }));
+                     }
+                     // Wait for all pages and sum counts
+                     return Promise.all(countPromises).then(function (counts) {
+                       var count = 0;
+                       counts.forEach(function (c) { count += c; });
+                       return count;
+                     });
+                });
+                }
+                // waiting on countWords to finish completion, or error
+                countWords("https://cdn.mozilla.net/pdfjs/tracemonkey.pdf").then(function (count) {
+                  alert(count);
+                }, function (reason) {
+                  console.error(reason);
+                });
+
             
             document.querySelector('#prev-page').addEventListener('click', showPrevPage);
             document.querySelector('#next-page').addEventListener('click', showNextPage);
             document.querySelector('#zoom_in').addEventListener('click', zoomIn);
-            document.querySelector('#zoom_out').addEventListener('click', zoomOut);/*WRITE THE PATH TO THE LOCAL FOLFER*/
+            document.querySelector('#zoom_out').addEventListener('click', zoomOut);
             
             
