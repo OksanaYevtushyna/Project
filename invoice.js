@@ -1,4 +1,4 @@
- const url = 'Wiki.pdf'; /*WRITE THE PATH TO THE LOCAL FOLDER*/
+ const url = 'Wiki.pdf'; /*WRITE THE PATH TO THE LOCAL FOLFER*/
             
             let pdfDoc = null,
                 pageNum = 1,
@@ -131,24 +131,9 @@
                 document.querySelector('#page-count').textContent = pdfDoc.numPages;
                 
                 renderPage(pageNum)
-            });
-            
-           /* var Parse = require('parse');
-            let str = [];
-                pdfjsLib.getDocument(url).then(function(pdf) {
-                  for(let i = 1; i <= pdf.numPages; i++) {
-                    pdf.getPage(i).then(function(page) {
-                      page.getTextContent().then(function(textContent) {
-                        for(let j = 0; j < textContent.items.length; j++) {
-                          str.push(textContent.items[j].str);
-                        }
-                        parse(str);
-                      });
-                    });
-                  }
-                });*/
+            })
         
-            
+
             function countWords(pdfUrl){
                 var pdf = pdfjsLib.getDocument(url);
                 return pdf.then(function(pdf) { // calculate total count for document
@@ -182,11 +167,11 @@
                 }
                 // waiting on countWords to finish completion, or error
                 countWords("https://cdn.mozilla.net/pdfjs/tracemonkey.pdf").then(function (count) {
-                  alert(count);
+                  alert(`Total amount of words on document: ${count}`);
                 }, function (reason) {
                   console.error(reason);
                 });
-
+            
             
             document.querySelector('#prev-page').addEventListener('click', showPrevPage);
             document.querySelector('#next-page').addEventListener('click', showNextPage);
@@ -194,3 +179,39 @@
             document.querySelector('#zoom_out').addEventListener('click', zoomOut);
             
             
+
+        //With GET request open PDF document from http resource in page invoice.html
+
+         const setContent = (content) => {
+                  console.log(content);
+                  //document.body.innerHTML += content;
+              };
+
+              const urlAddress = 'https://jsonplaceholder.typicode.com';
+
+              const request = (endpoint, method = 'GET', data = {}) => {
+                  const body = method === "GET" ? void 0 : JSON.stringify(data);
+                  return fetch(`${urlAddress}/${endpoint}`, {
+                      method,
+                      body,
+                      headers: {
+                        "Content-Type": "application/json"
+                      },
+                  })
+                  .then((res) => res.json())
+                  .catch((err) => console.error(err));
+              };
+            
+
+              const getUsers = async() => {
+                  try {
+                      const users = await request('users/');
+                      //renderUsers(users);
+                      setContent(JSON.stringify(users));
+                      debugger;
+                  } catch(err) {
+                      alert(err);
+                  }
+              }
+
+              getUsers();

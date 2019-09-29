@@ -26,6 +26,46 @@ img {
     margin-left: 13px;
 }
 
+.popup-fast {
+    width: 300px;
+    height: 300px;
+    background: #f5eee1;
+    z-index: 100;
+    padding: 23px 0 0 27px;
+    position: absolute;
+    top: 65px;
+    left: 1080px;
+    right: 0;
+    margin: auto;
+    display: none;
+}
+
+.pop {
+    width: 90%;
+}
+
+.pop-manage {
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    padding: 6px 24px;
+    cursor: pointer;
+    height: 38px;
+}
+
+.pop-manage:hover {
+    background: #D05FFF;
+    color: white;
+}
+
+.close {
+    margin: 0 18px 0 0;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    padding: 2px;
+    background: #ccc;
+}
+
 .content {
     grid-column: span 6;
     grid-row: content;
@@ -49,7 +89,7 @@ form {
 }
 
 .btn, .btn-large, .btn-small {
-    background-color: #FF5800;
+    background-color: #D05FFF;
     margin-top: 5px;
 }
 

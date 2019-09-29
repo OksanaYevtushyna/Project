@@ -15,9 +15,9 @@
             <header>
                 <nav>
                   <div class="nav-wrapper">
-                    <a href="http://www.nordicbackoffice.lv/en" class="brand-logo"><img src="logo-nordic-backoffice.png" height="55px"></a>
+                    <a href="http://www.nordicbackoffice.lv/en" class="brand-logo"><img src="Klaara_logo+sauklis-horiz.png" height="55px"></a>
                     <ul id="nav-mobile" class="right hide-on-med-and-down">
-                      <li><a href="#">Services</a></li>
+                      <li><a href="#" class="manage" onclick="show('block')">Management</a></li>
                       <li><a href="#">About us</a></li>
                       <li><a href="#">Contacts</a></li>
                     </ul>
@@ -31,7 +31,7 @@
                         </div>
                         <div class="col s4">
                             <p class="programName">Klaara</p>
-                            <form class="checkgroup" action="invoice.html">
+                            <form class="checkgroup" action="invoice1.html">
                             <div class="row">
                               <div class="input-field col s6">
                                 <input value="" id="first_name2" type="text" class="validate">
@@ -64,8 +64,27 @@
             <footer>
                 <p>copyright <sup>©</sup> 2019 all rights reserved</p>
             </footer>
+            
+            <div class="popup-fast">
+                <img class="close" alt="Close" src="close.png" onclick="show('none')">
+                <div class="form">
+                    <form action="invoice-manage.html" method="POST" class="pop">
+                        <input type="text" name="adminname" placeholder="Admin Name">
+                        <input type="password" name="password" placeholder="Password">
+                        <a href="invoice-manage.html"><button type="submit" class="pop-manage" name="action">Log In</button></a>
+                    </form>
+                </div>
+            </div>
         </div>
 
       <script type="text/javascript" src="bower_components/materialize/dist/js/materialize.min.js"></script>
+        
+        <script>       
+              function show (state){
+                  document.querySelector('.popup-fast').style.display = state;
+                  document.querySelector('.close').style.display = state;
+              }      
+                  
+        </script>
     </body>
   </html>
